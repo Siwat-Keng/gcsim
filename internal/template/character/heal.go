@@ -44,7 +44,9 @@ func (c *Character) Heal(hi *info.HealInfo) (float64, float64) {
 	}
 
 	// update hp debt based on original heal amount
-	c.ModifyHPDebtByAmount(-healAmt)
+	if c.currentHPDebt != 0 {
+		c.ModifyHPDebtByAmount(-healAmt)
+	}
 
 	// perform heal based on actual heal amount
 	c.ModifyHPByAmount(heal)
